@@ -1,6 +1,8 @@
 package com.hallo.helloworld;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -34,13 +36,18 @@ public class LoginActivity extends AppCompatActivity {
 
                 if(txtUsername.getText().toString().equals("admin") && txtPassword.getText().toString().equals("admin")){
                    onClickberhasil();
+
                 }else{
                     Toast.makeText(getApplicationContext(), "Username atau Password Anda tidak benar!", Toast.LENGTH_SHORT).show();
                 }
+
             }
             private void onClickberhasil(){
                 setContentView(R.layout.activity_home);
                 startActivity(new Intent( getApplicationContext() , HomeActivity.class));
+                Intent intent = new Intent(getBaseContext(), HomeActivity.class);
+                intent.putExtra("COBA_INTENT_EXTRA", "Percobaan");
+                startActivity(intent);
             }
 
         });

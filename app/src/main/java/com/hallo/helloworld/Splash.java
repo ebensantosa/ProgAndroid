@@ -8,6 +8,8 @@ import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.HelloWorld.R;
+
 public class Splash extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState){

@@ -1,3 +1,27 @@
 <resources>
     <string name="app_name">Aplikasiku</string>
+
+    <string name="background_service">Background Service</string>
+    <string name="cerita">Cerita</string>
+    <string name="images">Images</string>
+    <string name="title">Title</string>
+
+    <string-array name="kumpulanFilm">
+        <item>Naruto Shippuden</item>
+        <item>Bleach</item>
+        <item>One Piece</item>
+        <item>JoJo Bizarre Adventure</item>
+        <item>Doraemon</item>
+
+    </string-array>
+
+    <string-array name="cerita">
+        <item>Naruto Uzumaki, is a loud, hyperactive, adolescent ninja who constantly searches for approval and recognition, as well as to become Hokage, who is acknowledged as the leader and strongest of all ninja in the village.</item>
+
+        <item>High school student Kurosaki Ichigo is unlike any ordinary kid because he can see ghosts. After an accident with a hollow, he got a power.So begins Kurosaki Ichigo training and duty as a Shinigami, Soul Reaper.</item>
+        <item>Follows the adventures of Monkey D. Luffy and his pirate crew in order to find the greatest treasure ever left by the legendary Pirate, Gold Roger. The famous mystery treasure named "One Piece".</item>
+
+        <item>The story of the Joestar family, who are possessed with intense psychic strength, and the adventures each member encounters throughout their lives.</item>
+        <item>The misadventures of Doraemon, a robot cat from the future, who with his gadgets, is sent back in time to help make Nobita Nobi, a boy without much talent, a better person.EN</item>
+    </string-array>
 </resources>

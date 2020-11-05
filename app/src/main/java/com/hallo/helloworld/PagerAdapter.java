@@ -15,9 +15,9 @@ public class PagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position){
         switch (position){
             case 0:
-                return new FragmentTop();
+                return new FragmentRight();
             case 1:
-                return new FragmentButtom();
+                return new FragmentLeft();
             default:
                 return null;
         }

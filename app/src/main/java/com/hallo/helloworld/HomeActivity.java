@@ -1,6 +1,7 @@
 package com.hallo.helloworld;
-
-import android.app.ActionBar;
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
+import android.content.ComponentName;
 import android.content.IntentFilter;
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -12,12 +13,18 @@ import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.FrameLayout;
+
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.HelloWorld.R;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import android.widget.Switch;
@@ -26,22 +33,31 @@ import android.widget.Switch;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private Switch swi;
+    private Switch sw;
     private WifiManager wm;
+
+    private Button btnStartJob;
+    private Button btnCancelJob;
 
     private static final String TAG = HomeActivity.class.getSimpleName();
 
     private FrameLayout fragmentHolder;
+
+    public HomeActivity() {
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        TabLayout tabLayout = findViewById(R.id.tabBar);
-        TabItem fragmentTop = findViewById(R.id.fragmentTop);
-        TabItem fragmentBottom = findViewById(R.id.fragmentBottom);
-        final ViewPager viewPager = findViewById(R.id.viewPager);
+        btnStartJob = findViewById(R.id.startJob);
+        btnStartJob = findViewById(R.id.cancelJob);
 
+        TabLayout tabLayout = findViewById(R.id.tabBar);
+        TabItem fragmentTop = findViewById(R.id.fragmentLeft);
+        TabItem fragmentBottom = findViewById(R.id.fragmentRight);
+        final ViewPager viewPager = findViewById(R.id.viewPager);
 
         final PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
 
@@ -69,7 +85,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        swi = findViewById(R.id.wifiswi);
+        sw = findViewById(R.id.wifi_switch);
         BroadcastRec();
     }
     protected void onStart() {
@@ -84,9 +100,14 @@ public class HomeActivity extends AppCompatActivity {
     }
     public void notifOn (String message, Context context){
         String CHANNEL_ID = "MY_NOTIF";
-        NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, "My channel", NotificationManager.IMPORTANCE_HIGH);
+        NotificationChannel mChannel = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            mChannel = new NotificationChannel(CHANNEL_ID, "My channel", NotificationManager.IMPORTANCE_HIGH);
+        }
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        notificationManager.createNotificationChannel(mChannel);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            notificationManager.createNotificationChannel(mChannel);
+        }
         Notification notification = new NotificationCompat.Builder(HomeActivity.this, CHANNEL_ID)
                 .setSmallIcon(R.drawable.icon_wifi)
                 .setContentTitle("STATUS WIFI :")
@@ -103,16 +124,16 @@ public class HomeActivity extends AppCompatActivity {
             switch (wifiStateExtra) {
                 case WifiManager.WIFI_STATE_ENABLED:
 
-                    swi.setChecked(true);
-                    swi.setText("WIFI Online");
-                    notifOn("WIFI Online",context);
+                    sw.setChecked(true);
+                    sw.setText("WIFI ON");
+                    notifOn("WIFI ON",context);
                     break;
 
                 case WifiManager.WIFI_STATE_DISABLED:
-                    swi.setChecked(false);
+                    sw.setChecked(false);
 
-                    swi.setText("WIFI Offline");
-                    notifOn("WIFI Offline",context);
+                    sw.setText("WIFI OFF");
+                    notifOn("WIFI OFF",context);
                     break;
             }
 
@@ -123,7 +144,7 @@ public class HomeActivity extends AppCompatActivity {
     private void BroadcastRec() {
         final WifiManager wifiManager = (WifiManager)
                 getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-        swi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        sw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked && !wifiManager.isWifiEnabled()) {
@@ -141,11 +162,35 @@ public class HomeActivity extends AppCompatActivity {
                         Intent panelIntent = new Intent(Settings.Panel.ACTION_WIFI);
                         HomeActivity.this.startActivityForResult(panelIntent, 1);
                     } else {
-
                         wifiManager.setWifiEnabled(false);
                     }
                 }
             }
         });
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public void scheduleJob(View view){
+        ComponentName componentName = new ComponentName(getApplicationContext(), MyJobService.class);
+        JobInfo info = new JobInfo.Builder(123,componentName)
+                .setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED)
+                .setPersisted(true)
+                .setPeriodic(15 * 60 * 1000) //dilakukan setiap 15 menit
+                .build();
+
+        JobScheduler scheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
+        int resultCode = scheduler.schedule(info);
+        if(resultCode == JobScheduler.RESULT_SUCCESS){
+            Log.i(TAG, "scheduleJob: Job Scheduled");
+        }else{
+            Log.i(TAG, "scheduleJob: Job Scheduling Failed");
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public void cancelJob(View view){
+        JobScheduler scheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
+        scheduler.cancel(123);
+        Log.i(TAG, "cancelJob: Job Cancel Job");
     }
 }

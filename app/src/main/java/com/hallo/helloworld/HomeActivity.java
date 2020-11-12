@@ -24,7 +24,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.HelloWorld.R;
+import com.hallo.HelloWorld.R;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import android.widget.Switch;
@@ -32,9 +32,15 @@ import android.widget.Switch;
 
 
 public class HomeActivity extends AppCompatActivity {
-
+    private SharedPrefManager sharedPreferenceConfig;
     private Switch sw;
     private WifiManager wm;
+
+    private Button button;
+    SharedPrefManager sharedPrefManager;
+
+
+
 
     private Button btnStartJob;
     private Button btnCancelJob;
@@ -62,7 +68,21 @@ public class HomeActivity extends AppCompatActivity {
         final PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
 
         viewPager.setAdapter(pagerAdapter);
+        sharedPrefManager = new SharedPrefManager(this);
 
+        button=findViewById(R.id.keluar);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                sharedPrefManager.saveSPBoolean(SharedPrefManager.SP_SUDAH_LOGIN, false);
+                startActivity(new Intent(HomeActivity.this, LoginActivity.class)
+                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                finish();
+
+            }
+        });
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {

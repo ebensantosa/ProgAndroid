@@ -8,7 +8,7 @@ import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.HelloWorld.R;
+import com.hallo.HelloWorld.R;
 
 public class FragmentRight extends Fragment {
     private static final String TAG = FragmentRight.class.getSimpleName();

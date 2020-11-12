@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.HelloWorld.R;
+import com.hallo.HelloWorld.R;
 
 public class FragmentLeft extends Fragment {
     private static final String TAG = FragmentLeft.class.getSimpleName();

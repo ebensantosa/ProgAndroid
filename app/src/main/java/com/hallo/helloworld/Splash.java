@@ -8,7 +8,7 @@ import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.HelloWorld.R;
+import com.hallo.HelloWorld.R;
 
 public class Splash extends AppCompatActivity {
     @Override

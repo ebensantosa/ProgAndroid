@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient"
+    android:orientation="vertical"
+    android:gravity="center"
+  >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="REGISTER AKUN BARU"
+        android:layout_margin="30dp"
+        android:textStyle="bold"
+        android:textColor="@color/colorwhite"
+        android:textSize="20sp" />
+    <EditText
+        android:id="@+id/txID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:hint="Username"
+        android:inputType="textPersonName"
+        android:visibility="gone"/>
+
+    <EditText
+        android:id="@+id/txUsernameReg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:hint="Username"
+        android:inputType="textPersonName"
+        android:textColor="#FFFDFC"
+        android:textColorHint="#FFFFFF" />
+
+    <EditText
+        android:id="@+id/txPasswordReg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:hint="Password"
+        android:textColor="#FFFDFC"
+        android:textColorHint="#FFFFFF"
+        android:inputType="textPassword" />
+    <EditText
+        android:id="@+id/txConPassword"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:textColor="#FFFDFC"
+        android:textColorHint="#FFFFFF"
+        android:hint="Confirm Password"
+        android:inputType="textPassword" />
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        android:layout_marginBottom="10dp"
+        style="@style/Widget.AppCompat.Button.Colored" />
+    <TextView
+        android:id="@+id/tvRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kembali ke Login"
+        android:textColor="@color/colorwhite"
+        android:layout_marginBottom="30dp"/>
+</LinearLayout>

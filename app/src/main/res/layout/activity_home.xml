@@ -17,6 +17,13 @@
         android:textStyle="normal|bold"
         android:gravity="start" />
 
+    <Button
+        android:id="@+id/keluar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/wifiswi"
+        android:text="Logout" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -24,4 +24,12 @@
         <item>The story of the Joestar family, who are possessed with intense psychic strength, and the adventures each member encounters throughout their lives.</item>
         <item>The misadventures of Doraemon, a robot cat from the future, who with his gadgets, is sent back in time to help make Nobita Nobi, a boy without much talent, a better person.EN</item>
     </string-array>
+
+
+    <string name="login_shared_preference">com.example.helloworld_login_shared_preference</string>
+    <string name="login_status_shared_preference">com.example.helloworld_login_status_shared_preference</string>
+    <string name="username">trueline</string>
+    <string name="password">solution</string>
+
+
 </resources>

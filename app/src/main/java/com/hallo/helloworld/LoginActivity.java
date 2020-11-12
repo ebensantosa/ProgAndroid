@@ -1,58 +1,87 @@
 package com.hallo.helloworld;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
-
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.Html;
+import android.text.Spanned;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.HelloWorld.R;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.hallo.HelloWorld.R;
 
 public class LoginActivity extends AppCompatActivity {
-    private static final String TAG = LoginActivity.class.getSimpleName();
 
-    private EditText txtUsername;
-    private EditText txtPassword;
-    private Button btnLogin;
+    EditText TxUsername, TxPassword;
+    Button BtnLogin,button;
+    DatabaseHelper dbHelper;
+
+    SharedPrefManager sharedPrefManager;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i(TAG, "onCreate: dipanggil");
-        Log.i(TAG, "onCreate: perubahan");
-
         setContentView(R.layout.activity_main);
-        txtUsername = findViewById(R.id.txtUsername);
-        txtPassword = findViewById(R.id.txtPassword);
-        btnLogin = findViewById(R.id.btnLogin);
-        btnLogin.setOnClickListener(new View.OnClickListener() {
 
+
+        TxUsername = (EditText)findViewById(R.id.txtUsername);
+        TxPassword = (EditText)findViewById(R.id.txtPassword);
+        BtnLogin = (Button)findViewById(R.id.btnLogin);
+        dbHelper = new DatabaseHelper(this);
+        sharedPrefManager = new SharedPrefManager(this);
+
+
+        TextView tvCreateAccount = (TextView)findViewById(R.id.buatakun);
+        tvCreateAccount.setText(fromHtml("Belum ada akun ? " +
+                "</font><font color='#FFFFFF'>Buat Akun</font>"));
+        tvCreateAccount.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, Register.class));
+            }
+        });
 
-                if(txtUsername.getText().toString().equals("admin") && txtPassword.getText().toString().equals("admin")){
-                   onClickberhasil();
 
-                }else{
-                    Toast.makeText(getApplicationContext(), "Username atau Password Anda tidak benar!", Toast.LENGTH_SHORT).show();
+        if (sharedPrefManager.getSPSudahLogin()){
+            startActivity(new Intent(LoginActivity.this, HomeActivity.class)
+                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+            finish();
+        }
+
+        BtnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String username = TxUsername.getText().toString().trim();
+                String password = TxPassword.getText().toString().trim();
+
+                Boolean res = dbHelper.checkUser(username,password);
+                if(res == true){
+
+                    Toast.makeText(LoginActivity.this, "Selamat Datang di Aplikasiku", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                    sharedPrefManager.saveSPBoolean(SharedPrefManager.SP_SUDAH_LOGIN, true);
+                    finish();
                 }
-
+                else
+                {
+                    Toast.makeText(LoginActivity.this, "Silahkan cek E-mail dan Password anda", Toast.LENGTH_SHORT).show();
+                }
             }
-            private void onClickberhasil(){
-                setContentView(R.layout.activity_home);
-                startActivity(new Intent( getApplicationContext() , HomeActivity.class));
-                Intent intent = new Intent(getBaseContext(), HomeActivity.class);
-                intent.putExtra("COBA_INTENT_EXTRA", "Percobaan");
-                startActivity(intent);
-            }
-
         });
     }
-
+    public static Spanned fromHtml(String html){
+        Spanned result;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+            result = Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY);
+        }else {
+            result = Html.fromHtml(html);
+        }
+        return result;
+    }
 }

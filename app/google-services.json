@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "195814228685",
+    "firebase_url": "https://progandro-firebase.firebaseio.com",
+    "project_id": "progandro-firebase",
+    "storage_bucket": "progandro-firebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:195814228685:android:aa88ce4a06b5119cf35f84",
+        "android_client_info": {
+          "package_name": "com.hallo.helloworld"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "195814228685-erd6unsc4plfhsi3gom6tjf5jhem02e9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hallo.helloworld",
+            "certificate_hash": "5fdb2015e167b30c046b3767e82d316a055e083e"
+          }
+        },
+        {
+          "client_id": "195814228685-5p4grdgosf38nkf3ukpefkpgb6tc600o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAsle32BYtJxZ4izQd19WJ8hqBMhNd7uk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "195814228685-5p4grdgosf38nkf3ukpefkpgb6tc600o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

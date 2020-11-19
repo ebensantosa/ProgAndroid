@@ -35,7 +35,6 @@ public class HomeActivity extends AppCompatActivity {
     private SharedPrefManager sharedPreferenceConfig;
     private Switch sw;
     private WifiManager wm;
-
     private Button button;
     SharedPrefManager sharedPrefManager;
 

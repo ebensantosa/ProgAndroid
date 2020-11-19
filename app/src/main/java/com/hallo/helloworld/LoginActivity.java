@@ -84,4 +84,8 @@ public class LoginActivity extends AppCompatActivity {
         }
         return result;
     }
+    public void signup(){
+        Intent intent = new Intent(this, Register.class);
+        startActivity(intent);
+    }
 }

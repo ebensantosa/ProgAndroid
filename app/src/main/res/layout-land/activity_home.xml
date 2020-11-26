@@ -9,7 +9,7 @@
 
     <ImageView
         android:id="@+id/imageCapture"
-        android:layout_width="match_parent"
+        android:layout_width="663dp"
         android:layout_height="200dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,9 +20,8 @@
 
     <Button
         android:id="@+id/cameraBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
         android:text="Camera"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.33"
@@ -31,9 +30,9 @@
 
     <Button
         android:id="@+id/galleryBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
+
         android:text="Gallery"
         app:layout_constraintBottom_toBottomOf="@+id/cameraBtn"
         app:layout_constraintStart_toEndOf="@+id/cameraBtn"

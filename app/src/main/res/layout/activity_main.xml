@@ -2,10 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@drawable/gradient"
-    android:gravity="center_vertical"
-    >
+    android:gravity="center_vertical">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -93,7 +93,6 @@ android:text="Login" />
         android:textColor="@color/colorwhite"
         android:text="Buat Akun"
         android:layout_marginBottom="30dp"/>
-
 
 
 

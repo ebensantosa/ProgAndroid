@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
     <ImageView
         android:id="@+id/imageCapture"
         android:layout_width="match_parent"
@@ -38,7 +37,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/cameraBtn"
         app:layout_constraintStart_toEndOf="@+id/cameraBtn"
         app:layout_constraintTop_toTopOf="@+id/cameraBtn" />
-
 
 
     <Switch
